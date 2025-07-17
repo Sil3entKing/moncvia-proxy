@@ -1,0 +1,26 @@
+# MonCVIA Backend – Serveur Proxy sécurisé
+
+Ce backend en Node.js protège la clé API OpenAI utilisée par l’application MonCVIA (générateur de CV/lettre IA).
+
+## Installation
+
+```bash
+npm install
+```
+
+## Lancement
+
+```bash
+npm start
+```
+
+## Endpoint
+
+POST /api  
+Payload :
+```json
+{
+  "prompt": "Texte à envoyer à l'IA",
+  "role": "Tu es un assistant spécialisé en CV"
+}
+```
