@@ -1,6 +1,6 @@
 const express = require("express");
-const dotenv = require("dotenv");
 const cors = require("cors");
+const dotenv = require("dotenv");
 const { Configuration, OpenAIApi } = require("openai");
 
 dotenv.config();
@@ -15,20 +15,24 @@ const openai = new OpenAIApi(configuration);
 
 app.post("/api", async (req, res) => {
   const { prompt, role } = req.body;
+
   try {
     const completion = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
       messages: [
         { role: "system", content: role },
-        { role: "user", content: prompt },
-      ],
+        { role: "user", content: prompt }
+      ]
     });
 
     res.json({ response: completion.data.choices[0].message.content });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`✅ Serveur proxy en ligne sur le port ${PORT}`));
+app.listen(PORT, () => {
+  console.log(`✅ Proxy prêt sur le port ${PORT}`);
+});
+
